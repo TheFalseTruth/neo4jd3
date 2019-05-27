@@ -147,13 +147,13 @@ def convert(fileName):
     result = jsonStart + nodesJSON + relationshipJSON + jsonEnd
 
 
-    with open('resultData[2].json', 'w') as outputFile:
+    with open('resultData.json', 'w') as outputFile:
         outputFile.write(result)
         outputFile.close()
 
 def main():
     if len(sys.argv) != 2:
-        print(f'Usage: python dot2json.py [dot file]')
+        print(f'Usage: python3 dot2json.py [dot file]')
         exit(-1)
     else:
         convert(sys.argv[1])
