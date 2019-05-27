@@ -1,0 +1,237 @@
+{
+	"results": [{
+		"columns": ["user", "entity"],
+		"data": [{
+			"graph": {
+
+				"nodes": [{
+					"id": "0",
+					"labels": ["Node Type: ENTRY_POINT 0"],
+					"properties": {
+						"description": "Node Type: ENTRY_POINT 0 "
+					}
+				}, {
+					"id": "1",
+					"labels": ["1"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 1  EXPRESSION: require(bool,string)(msg.sender == _from,line 67)  IRs: TMP_17(bool) = msg.sender == _from TMP_19 = SOLIDITY_CALL require(bool,string)(TMP_17,line 67)"
+					}
+				}, {
+					"id": "2",
+					"labels": ["2"],
+					"properties": {
+						"description": "Node Type: NEW VARIABLE 2  EXPRESSION: checkAllowance = AmazingTokenInterface(_tokenAddress).allowance(_from,address(this))  IRs: TMP_20 = CONVERT _tokenAddress to AmazingTokenInterface TMP_21 = CONVERT this to address TMP_23(uint256) = HIGH_LEVEL_CALL, dest:TMP_20(AmazingTokenInterface), function:allowance, arguments:['_from', 'TMP_21']   checkAllowance(uint256) := TMP_23(uint256)"
+					}
+				}, {
+					"id": "3",
+					"labels": ["3"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 3  EXPRESSION: require(bool,string)(checkAllowance == token_amount,line 71)  IRs: TMP_24(bool) = checkAllowance == token_amount TMP_26 = SOLIDITY_CALL require(bool,string)(TMP_24,line 71)"
+					}
+				}, {
+					"id": "4",
+					"labels": ["4"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 4  EXPRESSION: AmazingTokenInterface(_tokenAddress).transferFrom(_from,address(this),checkAllowance)  IRs: TMP_27 = CONVERT _tokenAddress to AmazingTokenInterface TMP_28 = CONVERT this to address TMP_30(bool) = HIGH_LEVEL_CALL, dest:TMP_27(AmazingTokenInterface), function:transferFrom, arguments:['_from', 'TMP_28', 'checkAllowance']  "
+					}
+				}, {
+					"id": "5",
+					"labels": ["5"],
+					"properties": {
+						"description": "Node Type: IF 5  EXPRESSION: transactionInfo[_from][_to].exist == true  IRs: REF_25(mapping(address => escrow.transaction)) -> transactionInfo[_from] REF_26(escrow.transaction) -> REF_25[_to] REF_27(bool) -> REF_26.exist TMP_31(bool) = REF_27 == true CONDITION TMP_31"
+					}
+				}, {
+					"id": "6",
+					"labels": ["6"],
+					"properties": {
+						"description": "Node Type: NEW VARIABLE 6  EXPRESSION: currentTransaction = transactionInfo[_from][_to]  IRs: REF_28(mapping(address => escrow.transaction)) -> transactionInfo[_from] REF_29(escrow.transaction) -> REF_28[_to] currentTransaction(escrow.transaction) := REF_29(escrow.transaction)"
+					}
+				}, {
+					"id": "7",
+					"labels": ["7"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 7  EXPRESSION: currentTransaction.addressToken = _tokenAddress  IRs: REF_30(address) -> currentTransaction.addressToken REF_30 (->currentTransaction) := _tokenAddress(address)"
+					}
+				}, {
+					"id": "8",
+					"labels": ["8"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 8  EXPRESSION: currentTransaction.token_amount = checkAllowance  IRs: REF_31(uint256) -> currentTransaction.token_amount REF_31 (->currentTransaction) := checkAllowance(uint256)"
+					}
+				}, {
+					"id": "9",
+					"labels": ["9"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 9  EXPRESSION: currentTransaction.approve_Token = true  IRs: REF_32(bool) -> currentTransaction.approve_Token REF_32 (->currentTransaction) := true(string)"
+					}
+				}, {
+					"id": "10",
+					"labels": ["10"],
+					"properties": {
+						"description": "Node Type: IF 10  EXPRESSION: currentTransaction.approve_Eth == true && currentTransaction.approve_Token == true  IRs: REF_33(bool) -> currentTransaction.approve_Eth TMP_32(bool) = REF_33 == true REF_34(bool) -> currentTransaction.approve_Token TMP_33(bool) = REF_34 == true TMP_34(bool) = TMP_32 && TMP_33 CONDITION TMP_34"
+					}
+				}, {
+					"id": "11",
+					"labels": ["11"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 11  EXPRESSION: AmazingTokenInterface(_tokenAddress).transfer(currentTransaction.sendEthAddress,currentTransaction.token_amount)  IRs: TMP_35 = CONVERT _tokenAddress to AmazingTokenInterface REF_36(address) -> currentTransaction.sendEthAddress REF_37(uint256) -> currentTransaction.token_amount TMP_37(bool) = HIGH_LEVEL_CALL, dest:TMP_35(AmazingTokenInterface), function:transfer, arguments:['REF_36', 'REF_37']  "
+					}
+				}, {
+					"id": "12",
+					"labels": ["12"],
+					"properties": {
+						"description": "Node Type: NEW VARIABLE 12  EXPRESSION: TokenerAddress = currentTransaction.sendTokenAddress  IRs: REF_38(address) -> currentTransaction.sendTokenAddress TokenerAddress(address) := REF_38(address)"
+					}
+				}, {
+					"id": "13",
+					"labels": ["13"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 13  EXPRESSION: TokenerAddress.transfer(currentTransaction.eth_amount)  IRs: REF_40(uint256) -> currentTransaction.eth_amount Transfer dest:TokenerAddress value:REF_40"
+					}
+				}, {
+					"id": "14",
+					"labels": ["14"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 14  EXPRESSION: currentTransaction.eth_amount = 0  IRs: REF_41(uint256) -> currentTransaction.eth_amount REF_41 (->currentTransaction) := 0(uint256)"
+					}
+				}, {
+					"id": "15",
+					"labels": ["15"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 15  EXPRESSION: currentTransaction.token_amount = 0  IRs: REF_42(uint256) -> currentTransaction.token_amount REF_42 (->currentTransaction) := 0(uint256)"
+					}
+				}, {
+					"id": "16",
+					"labels": ["16"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 16  EXPRESSION: currentTransaction.exist = false  IRs: REF_43(bool) -> currentTransaction.exist REF_43 (->currentTransaction) := false(string)"
+					}
+				}, {
+					"id": "17",
+					"labels": ["17"],
+					"properties": {
+						"description": "Node Type: END_IF 17 "
+					}
+				}, {
+					"id": "18",
+					"labels": ["18"],
+					"properties": {
+						"description": "Node Type: NEW VARIABLE 18  EXPRESSION: newTransaction = transaction(_to,_from,0,token_amount,true,false,true,_tokenAddress)  IRs: TMP_41 = new transaction(_to,_from,0,token_amount,true,false,true,_tokenAddress) newTransaction(escrow.transaction) := TMP_41(escrow.transaction)"
+					}
+				}, {
+					"id": "19",
+					"labels": ["19"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 19  EXPRESSION: transactionInfo[_from][_to] = newTransaction  IRs: REF_44(mapping(address => escrow.transaction)) -> transactionInfo[_from] REF_45(escrow.transaction) -> REF_44[_to] REF_45 (->transactionInfo) := newTransaction(escrow.transaction)"
+					}
+				}, {
+					"id": "20",
+					"labels": ["20"],
+					"properties": {
+						"description": "Node Type: EXPRESSION 20  EXPRESSION: transactionInfo[_to][_from] = newTransaction  IRs: REF_46(mapping(address => escrow.transaction)) -> transactionInfo[_to] REF_47(escrow.transaction) -> REF_46[_from] REF_47 (->transactionInfo) := newTransaction(escrow.transaction)"
+					}
+				}, {
+					"id": "21",
+					"labels": ["21"],
+					"properties": {
+						"description": "Node Type: END_IF 21 "
+					}
+				}],
+				"relationships": [{
+					"id": "1",
+					"startNode": "0",
+					"endNode": "1"
+				}, {
+					"id": "2",
+					"startNode": "1",
+					"endNode": "2"
+				}, {
+					"id": "3",
+					"startNode": "2",
+					"endNode": "3"
+				}, {
+					"id": "4",
+					"startNode": "3",
+					"endNode": "4"
+				}, {
+					"id": "5",
+					"startNode": "4",
+					"endNode": "5"
+				}, {
+					"id": "6",
+					"startNode": "5",
+					"endNode": "6"
+				}, {
+					"id": "7",
+					"startNode": "5",
+					"endNode": "18"
+				}, {
+					"id": "8",
+					"startNode": "6",
+					"endNode": "7"
+				}, {
+					"id": "9",
+					"startNode": "7",
+					"endNode": "8"
+				}, {
+					"id": "10",
+					"startNode": "8",
+					"endNode": "9"
+				}, {
+					"id": "11",
+					"startNode": "9",
+					"endNode": "10"
+				}, {
+					"id": "12",
+					"startNode": "10",
+					"endNode": "11"
+				}, {
+					"id": "13",
+					"startNode": "10",
+					"endNode": "17"
+				}, {
+					"id": "14",
+					"startNode": "11",
+					"endNode": "12"
+				}, {
+					"id": "15",
+					"startNode": "12",
+					"endNode": "13"
+				}, {
+					"id": "16",
+					"startNode": "13",
+					"endNode": "14"
+				}, {
+					"id": "17",
+					"startNode": "14",
+					"endNode": "15"
+				}, {
+					"id": "18",
+					"startNode": "15",
+					"endNode": "16"
+				}, {
+					"id": "19",
+					"startNode": "16",
+					"endNode": "17"
+				}, {
+					"id": "20",
+					"startNode": "17",
+					"endNode": "21"
+				}, {
+					"id": "21",
+					"startNode": "18",
+					"endNode": "19"
+				}, {
+					"id": "22",
+					"startNode": "19",
+					"endNode": "20"
+				}, {
+					"id": "23",
+					"startNode": "20",
+					"endNode": "21"
+				}]
+			}
+		}]
+	}],
+	"errors": []
+}

@@ -1,0 +1,198 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == _from,line 67)
+
+IRs:
+TMP_17(bool) = msg.sender == _from
+TMP_19 = SOLIDITY_CALL require(bool,string)(TMP_17,line 67)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+checkAllowance = AmazingTokenInterface(_tokenAddress).allowance(_from,address(this))
+
+IRs:
+TMP_20 = CONVERT _tokenAddress to AmazingTokenInterface
+TMP_21 = CONVERT this to address
+TMP_23(uint256) = HIGH_LEVEL_CALL, dest:TMP_20(AmazingTokenInterface), function:allowance, arguments:['_from', 'TMP_21']  
+checkAllowance(uint256) := TMP_23(uint256)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+require(bool,string)(checkAllowance == token_amount,line 71)
+
+IRs:
+TMP_24(bool) = checkAllowance == token_amount
+TMP_26 = SOLIDITY_CALL require(bool,string)(TMP_24,line 71)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+AmazingTokenInterface(_tokenAddress).transferFrom(_from,address(this),checkAllowance)
+
+IRs:
+TMP_27 = CONVERT _tokenAddress to AmazingTokenInterface
+TMP_28 = CONVERT this to address
+TMP_30(bool) = HIGH_LEVEL_CALL, dest:TMP_27(AmazingTokenInterface), function:transferFrom, arguments:['_from', 'TMP_28', 'checkAllowance']  "];
+4->5;
+5[label="Node Type: IF 5
+
+EXPRESSION:
+transactionInfo[_from][_to].exist == true
+
+IRs:
+REF_25(mapping(address => escrow.transaction)) -> transactionInfo[_from]
+REF_26(escrow.transaction) -> REF_25[_to]
+REF_27(bool) -> REF_26.exist
+TMP_31(bool) = REF_27 == true
+CONDITION TMP_31"];
+5->6;
+5->18;
+6[label="Node Type: NEW VARIABLE 6
+
+EXPRESSION:
+currentTransaction = transactionInfo[_from][_to]
+
+IRs:
+REF_28(mapping(address => escrow.transaction)) -> transactionInfo[_from]
+REF_29(escrow.transaction) -> REF_28[_to]
+currentTransaction(escrow.transaction) := REF_29(escrow.transaction)"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+currentTransaction.addressToken = _tokenAddress
+
+IRs:
+REF_30(address) -> currentTransaction.addressToken
+REF_30 (->currentTransaction) := _tokenAddress(address)"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+currentTransaction.token_amount = checkAllowance
+
+IRs:
+REF_31(uint256) -> currentTransaction.token_amount
+REF_31 (->currentTransaction) := checkAllowance(uint256)"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+currentTransaction.approve_Token = true
+
+IRs:
+REF_32(bool) -> currentTransaction.approve_Token
+REF_32 (->currentTransaction) := true(string)"];
+9->10;
+10[label="Node Type: IF 10
+
+EXPRESSION:
+currentTransaction.approve_Eth == true && currentTransaction.approve_Token == true
+
+IRs:
+REF_33(bool) -> currentTransaction.approve_Eth
+TMP_32(bool) = REF_33 == true
+REF_34(bool) -> currentTransaction.approve_Token
+TMP_33(bool) = REF_34 == true
+TMP_34(bool) = TMP_32 && TMP_33
+CONDITION TMP_34"];
+10->11;
+10->17;
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+AmazingTokenInterface(_tokenAddress).transfer(currentTransaction.sendEthAddress,currentTransaction.token_amount)
+
+IRs:
+TMP_35 = CONVERT _tokenAddress to AmazingTokenInterface
+REF_36(address) -> currentTransaction.sendEthAddress
+REF_37(uint256) -> currentTransaction.token_amount
+TMP_37(bool) = HIGH_LEVEL_CALL, dest:TMP_35(AmazingTokenInterface), function:transfer, arguments:['REF_36', 'REF_37']  "];
+11->12;
+12[label="Node Type: NEW VARIABLE 12
+
+EXPRESSION:
+TokenerAddress = currentTransaction.sendTokenAddress
+
+IRs:
+REF_38(address) -> currentTransaction.sendTokenAddress
+TokenerAddress(address) := REF_38(address)"];
+12->13;
+13[label="Node Type: EXPRESSION 13
+
+EXPRESSION:
+TokenerAddress.transfer(currentTransaction.eth_amount)
+
+IRs:
+REF_40(uint256) -> currentTransaction.eth_amount
+Transfer dest:TokenerAddress value:REF_40"];
+13->14;
+14[label="Node Type: EXPRESSION 14
+
+EXPRESSION:
+currentTransaction.eth_amount = 0
+
+IRs:
+REF_41(uint256) -> currentTransaction.eth_amount
+REF_41 (->currentTransaction) := 0(uint256)"];
+14->15;
+15[label="Node Type: EXPRESSION 15
+
+EXPRESSION:
+currentTransaction.token_amount = 0
+
+IRs:
+REF_42(uint256) -> currentTransaction.token_amount
+REF_42 (->currentTransaction) := 0(uint256)"];
+15->16;
+16[label="Node Type: EXPRESSION 16
+
+EXPRESSION:
+currentTransaction.exist = false
+
+IRs:
+REF_43(bool) -> currentTransaction.exist
+REF_43 (->currentTransaction) := false(string)"];
+16->17;
+17[label="Node Type: END_IF 17
+"];
+17->21;
+18[label="Node Type: NEW VARIABLE 18
+
+EXPRESSION:
+newTransaction = transaction(_to,_from,0,token_amount,true,false,true,_tokenAddress)
+
+IRs:
+TMP_41 = new transaction(_to,_from,0,token_amount,true,false,true,_tokenAddress)
+newTransaction(escrow.transaction) := TMP_41(escrow.transaction)"];
+18->19;
+19[label="Node Type: EXPRESSION 19
+
+EXPRESSION:
+transactionInfo[_from][_to] = newTransaction
+
+IRs:
+REF_44(mapping(address => escrow.transaction)) -> transactionInfo[_from]
+REF_45(escrow.transaction) -> REF_44[_to]
+REF_45 (->transactionInfo) := newTransaction(escrow.transaction)"];
+19->20;
+20[label="Node Type: EXPRESSION 20
+
+EXPRESSION:
+transactionInfo[_to][_from] = newTransaction
+
+IRs:
+REF_46(mapping(address => escrow.transaction)) -> transactionInfo[_to]
+REF_47(escrow.transaction) -> REF_46[_from]
+REF_47 (->transactionInfo) := newTransaction(escrow.transaction)"];
+20->21;
+21[label="Node Type: END_IF 21
+"];
+}

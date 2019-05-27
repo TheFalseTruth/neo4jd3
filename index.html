@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="node_modules/neo4jd3/dist/css/neo4jd3.css">
+    <link rel="stylesheet" href="./styles.css">
+
+    <style>
+        body, html {
+            height: 100%;
+        }
+        .neo4jd3 {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="neo4jd3"></div>
+    
+    <script src="./node_modules/neo4jd3/dist/js/neo4jd3.js"></script>
+    <script src="./node_modules/d3/build/d3.js"></script>
+    <script type="text/javascript">
+        function init() {
+            var neo4jd3 = new Neo4jd3('#neo4jd3', {
+                neo4jDataUrl: 'json/resultData[2].json',
+                highlights: [{
+                    class: "ENTRY_POINT"
+                }, {
+                    class: "IF"
+                }, {
+                    class: "END_IF"
+                }],
+                icons: {
+                    'Language': 'language'
+                },
+                images: {
+                    'ENTRY_POINT': './node_modules/neo4jd3/docs/img/twemoji/1f31f.svg'
+                },
+                nodeRadius: 80,
+                minCollision: 200,
+                arrowSize: 10,
+                zoomFit: true
+            });
+            console.log(neo4jd3);
+        }
+
+        window.onload = init;
+        
+    </script>
+</body>
+</html>
